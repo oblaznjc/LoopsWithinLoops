@@ -19,7 +19,7 @@ def main():
 
 def demonstrate_sequence_of_sequences():
     """
-    Demonstrates     seqeunce_of_sequence_example
+    Demonstrates     sequence_of_sequence_example
        -- a classic example of manipulating a SEQUENCE of SUB-SEQUENCES.
     Also shows mutating those sub-sequences.
     """
