@@ -3,15 +3,15 @@ This project demonstrates NESTED LOOPS (i.e., loops within loops)
 in the context of TWO-DIMENSIONAL GRAPHICS.
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Jacob Oblazny.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
 
 def main():
     """ Calls the other functions to demonstrate them. """
-    run_test_draw_L()
+    # run_test_draw_L()
     run_test_draw_wall_on_right()
 
 
@@ -80,9 +80,40 @@ def draw_L(window, circle, r, c):
     and m and n are small, positive integers.
     """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
+
+    x = circle.center.x
+    x_origin = x
+    y = circle.center.y
+    y_origin = y
+    radius = circle.radius
+    center = rg.Point(x,y)
+    color = circle.fill_color
+
+    for k in range(r):
+        for j in range(3):
+            center = rg.Point(x, y)
+            add_circle = rg.Circle(center, radius)
+            add_circle.fill_color = color
+            add_circle.attach_to(window)
+            x = x + radius * 2
+            window.render(0.1)
+        x = x_origin
+        y = y + 2 * radius
+
+    for k in range(3):
+        for j in range(c + 3):
+            center = rg.Point(x, y)
+            add_circle = rg.Circle(center, radius)
+            add_circle.fill_color = color
+            add_circle.attach_to(window)
+            x = x + radius * 2
+            window.render(0.1)
+        x = x_origin
+        y = y + 2 * radius
+
 
 
 def run_test_draw_wall_on_right():
@@ -125,6 +156,23 @@ def draw_wall_on_right(rectangle, n, window):
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
 
+    x = rectangle.corner_1.x
+    x_origin = x
+    y = rectangle.corner_1.y
+
+    top_left = rg.Point(x,y)
+    bot_right = rg.Point(x + rectangle.get_width(), y + rectangle.get_height())
+
+    for k in range(n):
+        for _ in range(k + 1):
+            add_rectangle = rg.Rectangle(top_left, bot_right)
+            add_rectangle.attach_to(window)
+            top_left = rg.Point(x, y)
+            bot_right = rg.Point(x + rectangle.get_width(), y + rectangle.get_height())
+            x = x - add_rectangle.get_width()
+        x = x_origin
+        y = y + add_rectangle.get_height()
+        window.render()
 
 # ----------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
